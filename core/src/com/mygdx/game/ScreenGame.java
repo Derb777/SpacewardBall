@@ -46,6 +46,7 @@ public class ScreenGame implements Screen {
     StaticBody roof;
     KinematicBody platform;
     DynamicBody ball;
+    Array<StaticBody> boxes = new Array<>();
 
     public ScreenGame(SpacewardBall main) {
         this.main = main;
@@ -80,6 +81,16 @@ public class ScreenGame implements Screen {
         platform = new KinematicBody(world, 4.5f, 0.5f, 2.5f, 0.5f);
         ball = new DynamicBody(world, 4.5f, 8, 0.3f, "ball0");
         ball.setImpulse(new Vector2(0, -1.5f));
+
+        boxes.add(new StaticBody(world, 1, 10, 1, 0.5f));
+        boxes.add(new StaticBody(world, 3, 10, 1, 0.5f));
+        boxes.add(new StaticBody(world, 5, 10, 1, 0.5f));
+        boxes.add(new StaticBody(world, 7, 10, 1, 0.5f));
+
+        boxes.add(new StaticBody(world, 1, 12, 1, 0.5f));
+        boxes.add(new StaticBody(world, 3, 12, 1, 0.5f));
+        boxes.add(new StaticBody(world, 5, 12, 1, 0.5f));
+        boxes.add(new StaticBody(world, 7, 12, 1, 0.5f));
 
         //Gdx.input.setInputProcessor(new MyInputProcessor(this));
     }

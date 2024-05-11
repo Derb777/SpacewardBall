@@ -114,11 +114,14 @@ public class DynamicBody {
     }
 
     public void move() {
-        if(Math.abs(body.getLinearVelocity().x) < Math.abs(0.001f)) {
+        /*if(Math.abs(body.getLinearVelocity().x) < Math.abs(0.001f)) {
             body.applyLinearImpulse(new Vector2(MathUtils.random(-0.2f, 0.2f), 0), body.getWorldCenter(), true);
         }
         if(Math.abs(body.getLinearVelocity().y) < Math.abs(0.001f)) {
             body.applyLinearImpulse(new Vector2(0, MathUtils.random(-0.5f, 0.5f)), body.getWorldCenter(), true);
+        }*/
+        if(Math.abs(body.getAngularVelocity()) < Math.abs(0.5f)) {
+            body.applyAngularImpulse(MathUtils.random(-2f, 2f), true);
         }
     }
 }
