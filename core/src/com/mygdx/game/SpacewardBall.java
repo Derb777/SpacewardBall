@@ -93,23 +93,23 @@ public class SpacewardBall extends Game {
 		imgBrick10 = new Texture("Brick10.png");
 		imgBrick11 = new Texture("Brick11.png");
 
-		imgBricks1 = new Texture("imgBricks1");
-		imgBricks2 = new Texture("imgBricks2");
-		imgBricks3 = new Texture("imgBricks3");
-		imgBricks4 = new Texture("imgBricks4");
-		imgBricks5 = new Texture("imgBricks5");
-		imgBricks6 = new Texture("imgBricks6");
-		imgBricks7 = new Texture("imgBricks7");
-		imgBricks8 = new Texture("imgBricks8");
+		imgBricks1 = new Texture("imgBricks1.png");
+		imgBricks2 = new Texture("imgBricks2.png");
+		imgBricks3 = new Texture("imgBricks3.png");
+		imgBricks4 = new Texture("imgBricks4.png");
+		imgBricks5 = new Texture("imgBricks5.png");
+		imgBricks6 = new Texture("imgBricks6.png");
+		imgBricks7 = new Texture("imgBricks7.png");
+		imgBricks8 = new Texture("imgBricks8.png");
 
-		imgss1 = new Texture("imgss1");
-		imgss2 = new Texture("imgss2");
-		imgss3 = new Texture("imgss3");
+		imgss1 = new Texture("imgss1.png");
+		imgss2 = new Texture("imgss2.png");
+		imgss3 = new Texture("imgss3.png");
 
-		imgsrt1 = new Texture("imgsrt1");
-		imgsrt2 = new Texture("imgsr2");
-		imgsrt3 = new Texture("imgsr3");
-		imgsrt4 = new Texture("imgsrt4");
+		imgsrt1 = new Texture("imgsrt1.png");
+		imgsrt2 = new Texture("imgsr2.png");
+		imgsrt3 = new Texture("imgsr3.png");
+		imgsrt4 = new Texture("imgsrt4.png");
 
 
 
