@@ -14,8 +14,7 @@ public class KinematicBody {
     private float x, y;
     private float width, height;
     public Body body;
-    private float vx = 2, vy = 0;
-    private float av = 8;
+    public float vx = 2, vy = 0;
 
     public KinematicBody(World world, float x, float y, float width, float height) {
         this.x = x;
@@ -47,12 +46,15 @@ public class KinematicBody {
 
     public void move() {
         x = body.getPosition().x;
-        if(x>WORLD_WIDTH | x<0) {
-            vx = -vx;
-            av = -av;
-            body.setLinearVelocity(vx, vy);
-            body.setAngularVelocity(av);
+        if(x>WORLD_WIDTH-width/2-WALL_SIZE) {
+            vx = 0;
+            body.setTransform(WORLD_WIDTH-width/2-WALL_SIZE, y, 0);
         }
+        if(x<width/2+WALL_SIZE) {
+            vx = 0;
+            body.setTransform(width/2+WALL_SIZE, y, 0);
+        }
+        body.setLinearVelocity(vx, vy);
     }
 
     public float getX() {

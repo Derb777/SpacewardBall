@@ -28,8 +28,8 @@ public class DynamicBody {
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.linearDamping = 0.3f;
-        bodyDef.angularDamping = 0.3f;
+        bodyDef.linearDamping = 0f;
+        bodyDef.angularDamping = 0f;
         bodyDef.position.set(x, y);
 
         body = world.createBody(bodyDef);
@@ -42,7 +42,7 @@ public class DynamicBody {
         fixtureDef.shape = shape;
         fixtureDef.density = 0.5f;
         fixtureDef.friction = 0.8f;
-        fixtureDef.restitution = 0.8f;
+        fixtureDef.restitution = 1f;
 
         Fixture fixture = body.createFixture(fixtureDef);
         shape.dispose();
@@ -111,5 +111,14 @@ public class DynamicBody {
 
     public void setImpulse(Vector2 p) {
         body.applyLinearImpulse(p, body.getWorldCenter(), true);
+    }
+
+    public void move() {
+        if(Math.abs(body.getLinearVelocity().x) < Math.abs(0.001f)) {
+            body.applyLinearImpulse(new Vector2(MathUtils.random(-0.2f, 0.2f), 0), body.getWorldCenter(), true);
+        }
+        if(Math.abs(body.getLinearVelocity().y) < Math.abs(0.001f)) {
+            body.applyLinearImpulse(new Vector2(0, MathUtils.random(-0.5f, 0.5f)), body.getWorldCenter(), true);
+        }
     }
 }

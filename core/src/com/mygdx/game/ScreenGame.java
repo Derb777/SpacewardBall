@@ -3,6 +3,7 @@ package com.mygdx.game;
 import static com.mygdx.game.SpacewardBall.*;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -58,7 +59,7 @@ public class ScreenGame implements Screen {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, WORLD_WIDTH, WORLD_HEIGHT);
         touch = new Vector3();
-        world = new World(new Vector2(0, 0f), true);
+        world = new World(new Vector2(0, -0f), true);
         world.setContactListener(new MyContactListener(this));
         debugRenderer = new Box2DDebugRenderer();
         debugRenderer.setDrawVelocities(true);
@@ -72,14 +73,15 @@ public class ScreenGame implements Screen {
         }
         loadRecords();
 
-        wallLeft = new StaticBody(world, 0.05f, 8, 0.1f, 16);
-        wallRight = new StaticBody(world, 8.95f, 8, 0.1f, 16);
-        roof = new StaticBody(world, 4.5f, 15.95f, 9, 0.1f);
+        wallLeft = new StaticBody(world, 0.05f, 8, WALL_SIZE, 16);
+        wallRight = new StaticBody(world, 8.95f, 8, WALL_SIZE, 16);
+        roof = new StaticBody(world, 4.5f, 15.95f, 9, WALL_SIZE);
 
-        platform = new KinematicBody(world, 4.5f, 0.5f, 3, 0.5f);
+        platform = new KinematicBody(world, 4.5f, 0.5f, 2.5f, 0.5f);
         ball = new DynamicBody(world, 4.5f, 8, 0.3f, "ball0");
+        ball.setImpulse(new Vector2(0, -1.5f));
 
-        Gdx.input.setInputProcessor(new MyInputProcessor(this));
+        //Gdx.input.setInputProcessor(new MyInputProcessor(this));
     }
 
     @Override
@@ -99,8 +101,22 @@ public class ScreenGame implements Screen {
                 main.setScreen(main.screenMenu);
             }
         }
+        if(Gdx.input.isTouched()){
+            touch.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+            camera.unproject(touch);
+
+            platform.vx = (touch.x-platform.body.getPosition().x)*5;
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+            platform.vx = -0.5f;
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+            platform.vx = 0.5f;
+        }
 
         // события
+        platform.move();
+        ball.move();
 
         // отрисовка
         ScreenUtils.clear(0.5f, 0, 0.5f, 1);
