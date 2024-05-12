@@ -29,7 +29,7 @@ public class ScreenAbout implements Screen {
         touch = main.touch;
         font = main.fontLarge;
 
-        imgBackGround = new Texture("stars2.png");
+        imgBackGround = new Texture("srt3.png");
 
         btnBack = new SpaceButton("Back", 200, 400, font);
     }

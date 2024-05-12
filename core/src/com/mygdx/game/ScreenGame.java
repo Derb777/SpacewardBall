@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
@@ -37,6 +38,31 @@ public class ScreenGame implements Screen {
     Box2DDebugRenderer debugRenderer;
 
     Texture imgBackGround;
+    Texture imgball1;
+    Texture imgball2;
+    Texture imgball3;
+    Texture imgball4;
+    Texture imgball5;
+
+    Texture[] imgBrick = new Texture[11];
+
+    Texture imgBricks1;
+    Texture imgBricks2;
+    Texture imgBricks3;
+    Texture imgBricks4;
+    Texture imgBricks5;
+    Texture imgBricks6;
+    Texture imgBricks7;
+    Texture imgBricks8;
+
+    Texture imgss1;
+    Texture imgss2;
+    Texture imgss3;
+
+    Texture imgsrt1;
+    Texture imgsrt2;
+    Texture imgsrt3;
+    Texture imgsrt4;
 
     SpaceButton btnBack;
     Player[] players = new Player[11];
@@ -60,13 +86,41 @@ public class ScreenGame implements Screen {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, WORLD_WIDTH, WORLD_HEIGHT);
         touch = new Vector3();
-        world = new World(new Vector2(0, -0f), true);
+        world = new World(new Vector2(0, 0), true);
         world.setContactListener(new MyContactListener(this));
         debugRenderer = new Box2DDebugRenderer();
         debugRenderer.setDrawVelocities(true);
         debugRenderer.setDrawJoints(true);
 
         imgBackGround = new Texture("stars0.png");
+        imgball1 = new Texture("ball1.png");
+        imgball2 = new Texture("ball2.png");
+        imgball3 = new Texture("ball3.png");
+        imgball4 = new Texture("ball4.png");
+        imgball5 = new Texture("ball5.png");
+
+        for (int i = 0; i < imgBrick.length; i++) {
+            imgBrick[i] = new Texture("Brick"+i+".png");
+        }
+
+        imgBricks1 = new Texture("Bricks1.png");
+        imgBricks2 = new Texture("Bricks2.png");
+        imgBricks3 = new Texture("Bricks3.png");
+        imgBricks4 = new Texture("Bricks4.png");
+        imgBricks5 = new Texture("Bricks5.png");
+        imgBricks6 = new Texture("Bricks6.png");
+        imgBricks7 = new Texture("Bricks7.png");
+        imgBricks8 = new Texture("Bricks8.png");
+
+        imgss1 = new Texture("ss1.png");
+        imgss2 = new Texture("ss2.png");
+        imgss3 = new Texture("ss3.png");
+
+        imgsrt1 = new Texture("srt1.png");
+        imgsrt2 = new Texture("srt2.png");
+        imgsrt3 = new Texture("srt3.png");
+        imgsrt4 = new Texture("srt4.png");
+
 
         btnBack = new SpaceButton("back", SCR_HEIGHT/5-100, fontSmall, Align.center);
         for (int i = 0; i < players.length; i++) {
@@ -82,15 +136,21 @@ public class ScreenGame implements Screen {
         ball = new DynamicBody(world, 4.5f, 8, 0.3f, "ball0");
         ball.setImpulse(new Vector2(0, -1.5f));
 
-        boxes.add(new StaticBody(world, 1, 10, 1, 0.5f));
-        boxes.add(new StaticBody(world, 3, 10, 1, 0.5f));
-        boxes.add(new StaticBody(world, 5, 10, 1, 0.5f));
-        boxes.add(new StaticBody(world, 7, 10, 1, 0.5f));
+        boxes.add(new StaticBody(world, 1.4f, 10, 1, 0.5f));
+        boxes.add(new StaticBody(world, 3.6f, 10, 1, 0.5f));
+        boxes.add(new StaticBody(world, 5.6f, 10, 1, 0.5f));
+        boxes.add(new StaticBody(world, 7.7f, 10, 1, 0.5f));
 
-        boxes.add(new StaticBody(world, 1, 12, 1, 0.5f));
-        boxes.add(new StaticBody(world, 3, 12, 1, 0.5f));
-        boxes.add(new StaticBody(world, 5, 12, 1, 0.5f));
-        boxes.add(new StaticBody(world, 7, 12, 1, 0.5f));
+        boxes.add(new StaticBody(world, 1.4f, 14, 1, 0.5f));
+        boxes.add(new StaticBody(world, 3.6f, 14, 1, 0.5f));
+        boxes.add(new StaticBody(world, 5.6f, 14, 1, 0.5f));
+        boxes.add(new StaticBody(world, 7.7f, 14, 1, 0.5f));
+
+        boxes.add(new StaticBody(world, 1.4f, 12, 1, 0.5f));
+        boxes.add(new StaticBody(world, 3.6f, 12, 1, 0.5f));
+        boxes.add(new StaticBody(world, 5.6f, 12, 1, 0.5f));
+        boxes.add(new StaticBody(world, 7.7f, 12, 1, 0.5f));
+
 
         //Gdx.input.setInputProcessor(new MyInputProcessor(this));
     }
@@ -128,6 +188,15 @@ public class ScreenGame implements Screen {
         // события
         platform.move();
         ball.move();
+        for (int i = 0; i < boxes.size; i++) {
+            if((Integer) boxes.get(i).getBody().getUserData() == -1){
+                for (Fixture fixture : boxes.get(i).getBody().getFixtureList()) {
+                    boxes.get(i).getBody().destroyFixture(fixture);
+                }
+                world.destroyBody(boxes.get(i).getBody());
+                boxes.removeIndex(i);
+            }
+        }
 
         // отрисовка
         ScreenUtils.clear(0.5f, 0, 0.5f, 1);
@@ -135,6 +204,12 @@ public class ScreenGame implements Screen {
         debugRenderer.render(world, camera.combined);
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
+        for (int i = 0; i < boxes.size; i++) {
+            batch.draw(imgBrick[(Integer) boxes.get(i).getBody().getUserData()], boxes.get(i).getX(), boxes.get(i).getY(), boxes.get(i).getWidth(), boxes.get(i).getHeight());
+        }
+        batch.draw(imgss3, platform.getX(), platform.getY(), platform.getWidth(), platform.getHeight());
+        batch.draw(imgball1, ball.getX(), ball.getY(), ball.getWidth()/2, ball.getHeight()/2,
+                ball.getWidth(), ball.getHeight(), 1, 1, ball.getAngle(), 0, 0, 71, 71, false, false);
         batch.end();
 
         // тексты

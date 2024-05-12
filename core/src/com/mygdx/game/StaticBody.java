@@ -10,6 +10,7 @@ public class StaticBody {
     private float x, y;
     private float width, height;
     private Body body;
+    Integer lives = 5;
 
     public StaticBody(World world, float x, float y, float width, float height) {
         this.x = x;
@@ -22,11 +23,15 @@ public class StaticBody {
         bodyDef.position.set(x, y);
 
         body = world.createBody(bodyDef);
+        body.setUserData(lives);
 
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(width/2, height/2);
 
         Fixture fixture = body.createFixture(shape, 0);
+
+        fixture.setFriction(0f);
+        fixture.setRestitution(0f);
 
         shape.dispose();
     }
@@ -45,6 +50,10 @@ public class StaticBody {
 
     public float getHeight() {
         return height;
+    }
+
+    public Body getBody() {
+        return body;
     }
 
     public void setPosition(float x, float y) {

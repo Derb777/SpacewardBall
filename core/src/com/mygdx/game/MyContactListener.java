@@ -30,8 +30,11 @@ public class MyContactListener implements ContactListener {
         }
 
         // Проверка, что это столкновение между DynamicBody
-        if ((bodyA.getType() == BodyDef.BodyType.DynamicBody && bodyB.getType() == BodyDef.BodyType.StaticBody) ||
-                (bodyA.getType() == BodyDef.BodyType.StaticBody && bodyB.getType() == BodyDef.BodyType.DynamicBody)) {
+        if (bodyA.getType() == BodyDef.BodyType.DynamicBody && bodyB.getType() == BodyDef.BodyType.StaticBody){
+            bodyB.setUserData((Integer)bodyB.getUserData()-1);
+        }
+        if(bodyA.getType() == BodyDef.BodyType.StaticBody && bodyB.getType() == BodyDef.BodyType.DynamicBody) {
+            bodyA.setUserData((Integer)bodyA.getUserData()-1);
             // Момент начала столкновения
             //main.sndChpok.play();
         }

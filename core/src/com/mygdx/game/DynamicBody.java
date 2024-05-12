@@ -44,6 +44,8 @@ public class DynamicBody {
         fixtureDef.friction = 0.8f;
         fixtureDef.restitution = 1f;
 
+        body.setFixedRotation(true);
+
         Fixture fixture = body.createFixture(fixtureDef);
         shape.dispose();
     }

@@ -36,7 +36,7 @@ public class ScreenSettings implements Screen {
         fontLarge = main.fontLarge;
         fontSmall = main.fontSmall;
 
-        imgBackGround = new Texture("stars1.png");
+        imgBackGround = new Texture("srt1.png");
 
         loadSettings();
 

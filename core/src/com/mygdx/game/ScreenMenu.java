@@ -32,7 +32,7 @@ public class ScreenMenu implements Screen {
         touch = main.touch;
         font = main.fontLarge;
 
-        imgBackGround = new Texture("stars3.png");
+        imgBackGround = new Texture("srt4.png");
 
         btnPlay = new SpaceButton("Play", 100, 1000, font);
         btnSettings = new SpaceButton("Settings", 100, 800, font);
