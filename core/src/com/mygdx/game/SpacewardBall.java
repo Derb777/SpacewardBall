@@ -15,6 +15,10 @@ public class SpacewardBall extends Game {
 	public static final float WORLD_WIDTH = 9, WORLD_HEIGHT = 16;
 	public static final float SCR_WIDTH = 900, SCR_HEIGHT = 1600;
 	public static final float WALL_SIZE = 0.1f;
+
+
+
+
 	public static final int TYPE_BOARD = 0, TYPE_BOX1 = 1, TYPE_BOX2 = 2;
 
 	SpriteBatch batch;
